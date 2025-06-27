@@ -23,6 +23,12 @@ This project demonstrates a complete end-to-end DevOps pipeline for deploying a 
 
 ---
 
+![Screenshot 2025-06-27 at 9 18 23 AM](https://github.com/user-attachments/assets/5d06ba27-6915-4697-8a9a-cc8cf5b8cc07)
+![Screenshot 2025-06-27 at 9 18 45 AM](https://github.com/user-attachments/assets/538325c3-aabf-4241-bbfd-643ec198ecf8)
+![Screenshot 2025-06-27 at 9 19 16 AM](https://github.com/user-attachments/assets/509fda1e-dfb5-4f01-8f54-37e6d0627f8c)
+
+
+
 ## Project Overview
 This repository contains a Netflix Clone application built with React and TypeScript. The project demonstrates a robust DevOps workflow, including CI/CD automation, code quality checks, security scanning, containerization, monitoring, and deployment to Kubernetes.
 
@@ -59,6 +65,7 @@ This repository contains a Netflix Clone application built with React and TypeSc
 - Download and configure Prometheus for metrics collection.
 - Install and configure Node Exporter for system metrics.
 - Install Grafana for metrics visualization and connect it to Prometheus.
+![Screenshot 2025-06-27 at 5 49 53 AM](https://github.com/user-attachments/assets/3bf86ee1-f0c3-4afc-8a90-6df8b5367dc3)
 
 ---
 
@@ -66,6 +73,8 @@ This repository contains a Netflix Clone application built with React and TypeSc
 - Install the Prometheus plugin in Jenkins.
 - Add Jenkins as a target in Prometheus for monitoring.
 - Import Grafana dashboards for Jenkins metrics visualization.
+![Screenshot 2025-06-27 at 5 54 13 AM](https://github.com/user-attachments/assets/4358783a-6dd8-4d7d-a7af-c04b376ccd91)
+![Monituring After Pipeline Build](https://github.com/user-attachments/assets/af7ce1d8-e50a-4ca1-9531-d76e65a5a66e)
 
 ---
 
@@ -73,6 +82,8 @@ This repository contains a Netflix Clone application built with React and TypeSc
 - Install the Email Extension plugin in Jenkins.
 - Configure Gmail with app passwords for Jenkins notifications.
 - Set up email notifications in Jenkins pipeline for build results and reports.
+![Screenshot 2025-06-27 at 6 05 31 AM](https://github.com/user-attachments/assets/2d818779-c23d-4a58-b8d1-6f4d90bc57eb)
+![Screenshot 2025-06-27 at 6 05 51 AM](https://github.com/user-attachments/assets/de7213b9-d2ba-4e20-944f-0003c67f16b3)
 
 ---
 
@@ -87,12 +98,15 @@ This repository contains a Netflix Clone application built with React and TypeSc
 - Run SonarQube on port 9000 and generate a token for Jenkins integration.
 - Add SonarQube server and token in Jenkins credentials and system configuration.
 - Set up webhooks for quality gate status notifications.
+![Screenshot 2025-06-27 at 6 41 23 AM](https://github.com/user-attachments/assets/d6f21cb9-edf8-476d-afb1-4d6051f24d0f)
+![Screenshot 2025-06-27 at 6 42 08 AM](https://github.com/user-attachments/assets/fda9598e-2f14-4812-bc44-5ad70a9c18d2)
 
 ---
 
 ## Step 9: Install OWASP Dependency Check Plugins
 - Install and configure the OWASP Dependency-Check plugin in Jenkins.
 - Add pipeline stages for OWASP and Trivy filesystem scans.
+![OWASP_TRIVY_Pipeline_Build_SuccessFull](https://github.com/user-attachments/assets/5075ab00-2170-489a-8e6b-29bffa4b12d8)
 
 ---
 
@@ -102,6 +116,7 @@ This repository contains a Netflix Clone application built with React and TypeSc
 - Add pipeline stages to build, tag, and push Docker images.
 - Run Trivy image scan and store results.
 - Deploy the container locally for validation.
+![Screenshot 2025-06-27 at 8 16 55 AM](https://github.com/user-attachments/assets/91e5a730-c416-4e6b-9229-470518eee276)
 
 ---
 
@@ -233,8 +248,8 @@ pipeline{
 ---
 
 ## Credits
-- Original Netflix Clone: [jason-liu22/netflix-clone-react-typescript](https://github.com/jason-liu22/netflix-clone-react-typescript)
-- DevOps Pipeline, Monitoring, and Documentation: [Your Name]
+- Original Netflix Clone: [jason-liu22/netflix-clone-react-typescript](https://github.com/jason-lu22/netflix-clone-react-typescript)
+- DevOps Pipeline, Monitoring, and Documentation: Anshuman Mohapatra
 
 ---
 
