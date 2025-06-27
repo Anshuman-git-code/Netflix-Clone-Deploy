@@ -247,11 +247,5 @@ pipeline{
 
 ---
 
-## Credits
-- Original Netflix Clone: [jason-liu22/netflix-clone-react-typescript](https://github.com/jason-lu22/netflix-clone-react-typescript)
-- DevOps Pipeline, Monitoring, and Documentation: Anshuman Mohapatra
-
----
-
 ## License
 This project is for educational and demonstration purposes. 
