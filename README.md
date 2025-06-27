@@ -30,6 +30,8 @@ This project demonstrates a complete end-to-end DevOps pipeline for deploying a 
 ## Project Overview
 This repository contains a Netflix Clone application built with React and TypeScript. The project demonstrates a robust DevOps workflow, including CI/CD automation, code quality checks, security scanning, containerization, monitoring, and deployment to Kubernetes.
 
+<img width="1287" alt="Screenshot 2025-06-27 at 9 36 43 AM" src="https://github.com/user-attachments/assets/1ff251e8-9ce4-4d77-ba3c-4811ee850588" />
+
 ---
 
 ## Step 1: Launch EC2 Instance
