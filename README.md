@@ -1,95 +1,242 @@
-<div align="center">
-  <a href="http://netflix-clone-with-tmdb-using-react-mui.vercel.app/">
-    <img src="./public/assets/netflix-logo.png" alt="Logo" width="100" height="32">
-  </a>
+# Netflix Clone – Full DevOps Deployment & Monitoring
 
-  <h3 align="center">Netflix Clone</h3>
+This project demonstrates a complete end-to-end DevOps pipeline for deploying a Netflix Clone application, including CI/CD, security scanning, containerization, monitoring, and Kubernetes orchestration. Below are the detailed steps and tools used throughout the process.
 
-  <p align="center">
-    <a href="https://netflix-clone-react-typescript.vercel.app/">View Demo</a>
-    ·
-    <a href="https://github.com/crazy-man22/netflix-clone-react-typescript/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/crazy-man22/netflix-clone-react-typescript/issues">Request Feature</a>
-  </p>
-</div>
+---
 
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#prerequests">Prerequests</a>
-    </li>
-    <li>
-      <a href="#which-features-this-project-deals-with">Which features this project deals with</a>
-    </li>
-    <li><a href="#third-party-libraries-used-except-for-react-and-rtk">Third Party libraries used except for React and RTK</a></li>
-    <li>
-      <a href="#contact">Contact</a>
-    </li>
-  </ol>
-</details>
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Step 1: Launch EC2 Instance](#step-1-launch-ec2-instance)
+- [Step 2: Install Jenkins, Docker, and Trivy](#step-2-install-jenkins-docker-and-trivy)
+- [Step 3: TMDB API Key Setup](#step-3-create-a-tmdb-api-key)
+- [Step 4: Install Prometheus & Grafana](#step-4-install-prometheus-and-grafana)
+- [Step 5: Jenkins Monitoring with Prometheus](#step-5-install-the-prometheus-plugin-and-integrate-it-with-the-prometheus-server)
+- [Step 6: Jenkins Email Integration](#step-6-email-integration-with-jenkins-and-plugin-setup)
+- [Step 7: Jenkins Plugins & Pipeline Setup](#step-7-install-plugins-like-jdk-sonarqube-scanner-nodejs-owasp-dependency-check)
+- [Step 8: SonarQube Integration](#step-8-configure-sonar-server-in-manage-jenkins)
+- [Step 9: Security Scanning (OWASP & Trivy)](#step-9-install-owasp-dependency-check-plugins)
+- [Step 10: Docker Build & Push](#step-10-docker-image-build-and-push)
+- [Step 11: Kubernetes Setup & Deployment](#step-11-kuberenetes-setup)
+- [Step 12: Monitoring & Access](#step-12-access-from-a-web-browser)
+- [Step 13: Cleanup](#step-13-terminate-instances)
+- [Complete Jenkins Pipeline](#complete-jenkins-pipeline)
 
-<br />
+---
 
-<div align="center">
-  <img src="./public/assets/home-page.png" alt="Logo" width="100%" height="100%">
-  <p align="center">Home Page</p>
-  <img src="./public/assets/mini-portal.png" alt="Logo" width="100%" height="100%">
-  <p align="center">Mini Portal</p>
-  <img src="./public/assets/detail-modal.png" alt="Logo" width="100%" height="100%">
-  <p align="center">Detail Modal</p>
-  <img src="./public/assets/grid-genre.png" alt="Logo" width="100%" height="100%">
-  <p align="center">Grid Genre Page</p>
-  <img src="./public/assets/watch.png" alt="Logo" width="100%" height="100%">
-  <p align="center">Watch Page with customer contol bar</p>
-</div>
+## Project Overview
+This repository contains a Netflix Clone application built with React and TypeScript. The project demonstrates a robust DevOps workflow, including CI/CD automation, code quality checks, security scanning, containerization, monitoring, and deployment to Kubernetes.
 
-## Prerequests
+---
 
-- Create an account if you don't have on [TMDB](https://www.themoviedb.org/).
-  Because I use its free API to consume movie/tv data.
-- And then follow the [documentation](https://developers.themoviedb.org/3/getting-started/introduction) to create API Key
-- Finally, if you use v3 of TMDB API, create a file named `.env`, and copy and paste the content of `.env.example`.
-  And then paste the API Key you just created.
+## Step 1: Launch EC2 Instance
+- Launch an AWS EC2 T2 Large instance with Ubuntu 22.04.
+- Enable HTTP/HTTPS in the Security Group and open all ports (for learning/demo purposes).
 
-## Which features this project deal with
+---
 
-- How to create and use [Custom Hooks](https://reactjs.org/docs/hooks-custom.html)
-- How to use [Context](https://reactjs.org/docs/context.html) and its provider
-- How to use lazy and Suspense for [Code-Splitting](https://reactjs.org/docs/code-splitting.html)
-- How to use a new [lazy](https://reactrouter.com/en/main/route/lazy) feature of react-router to reduce bundle size.
-- How to use data [loader](https://reactrouter.com/en/main/route/loader) of react-router, and how to use redux dispatch in the loader to fetch data before rendering component.
-- How to use [Portal](https://reactjs.org/docs/portals.html)
-- How to use [Fowarding Refs](https://reactjs.org/docs/forwarding-refs.html) to make components reusuable
-- How to create and use [HOC](https://reactjs.org/docs/higher-order-components.html)
-- How to customize default theme of [MUI](https://mui.com/)
-- How to use [RTK](https://redux-toolkit.js.org/introduction/getting-started)
-- How to use [RTK Query](https://redux-toolkit.js.org/rtk-query/overview)
-- How to customize default classname of [MUI](https://mui.com/material-ui/experimental-api/classname-generator)
-- Infinite Scrolling(using [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API))
-- How to make awesome carousel using [slick-carousel](https://react-slick.neostack.com)
+## Step 2: Install Jenkins, Docker, and Trivy
+### Jenkins Installation
+- Install Jenkins using a shell script (`jenkins.sh`).
+- Open port 8080 for Jenkins access.
+- Unlock Jenkins, install suggested plugins, and create an admin user.
 
-## Third Party libraries used except for React and RTK
+### Docker Installation
+- Install Docker and add your user to the `docker` group.
+- Run SonarQube in a Docker container for code quality analysis.
 
-- [react-router-dom@v6.9](https://reactrouter.com/en/main)
-- [MUI(Material UI)](https://mui.com/)
-- [framer-motion](https://www.framer.com/docs/)
-- [video.js](https://videojs.com)
-- [react-slick](https://react-slick.neostack.com/)
+### Trivy Installation
+- Install Trivy for vulnerability scanning of filesystems and Docker images.
 
-## Install with Docker
+---
 
-```sh
-docker build --build-arg TMDB_V3_API_KEY=your_api_key_here -t netflix-clone .
+## Step 3: Create a TMDB API Key
+- Register at [TMDB](https://www.themoviedb.org/) and generate an API key for the application.
 
-docker run --name netflix-clone-website --rm -d -p 80:80 netflix-clone
+---
+
+## Step 4: Install Prometheus and Grafana
+- Create system users for Prometheus and Node Exporter.
+- Download and configure Prometheus for metrics collection.
+- Install and configure Node Exporter for system metrics.
+- Install Grafana for metrics visualization and connect it to Prometheus.
+
+---
+
+## Step 5: Install the Prometheus Plugin and Integrate it with the Prometheus Server
+- Install the Prometheus plugin in Jenkins.
+- Add Jenkins as a target in Prometheus for monitoring.
+- Import Grafana dashboards for Jenkins metrics visualization.
+
+---
+
+## Step 6: Email Integration With Jenkins and Plugin Setup
+- Install the Email Extension plugin in Jenkins.
+- Configure Gmail with app passwords for Jenkins notifications.
+- Set up email notifications in Jenkins pipeline for build results and reports.
+
+---
+
+## Step 7: Install Plugins like JDK, SonarQube Scanner, NodeJs, OWASP Dependency Check
+- Install required Jenkins plugins: Eclipse Temurin Installer, SonarQube Scanner, NodeJs, OWASP Dependency-Check.
+- Configure Java and Node.js in Jenkins Global Tool Configuration.
+- Create a Jenkins pipeline job for the Netflix Clone.
+
+---
+
+## Step 8: Configure Sonar Server in Manage Jenkins
+- Run SonarQube on port 9000 and generate a token for Jenkins integration.
+- Add SonarQube server and token in Jenkins credentials and system configuration.
+- Set up webhooks for quality gate status notifications.
+
+---
+
+## Step 9: Install OWASP Dependency Check Plugins
+- Install and configure the OWASP Dependency-Check plugin in Jenkins.
+- Add pipeline stages for OWASP and Trivy filesystem scans.
+
+---
+
+## Step 10: Docker Image Build and Push
+- Install Docker-related plugins in Jenkins.
+- Add DockerHub credentials in Jenkins.
+- Add pipeline stages to build, tag, and push Docker images.
+- Run Trivy image scan and store results.
+- Deploy the container locally for validation.
+
+---
+
+## Step 11: Kubernetes Setup
+- Set up two Ubuntu instances (master and worker) for Kubernetes.
+- Install Docker and Kubernetes tools on both.
+- Initialize the cluster, set up networking (Flannel), and configure `kubectl`.
+- Install the Kubernetes plugin in Jenkins and add credentials.
+- Install Node Exporter on both master and worker for monitoring.
+- Add both nodes as targets in Prometheus.
+- Add pipeline stages to deploy the app to Kubernetes using manifests.
+
+---
+
+## Step 12: Monitoring & Access
+- Access Prometheus and Grafana dashboards for system and Jenkins metrics.
+- Access the deployed Netflix Clone via the public IP and service port.
+
+---
+
+## Step 13: Terminate Instances
+- Clean up by terminating AWS EC2 instances when done.
+
+---
+
+## Complete Jenkins Pipeline
+Below is the Jenkins pipeline script used for the entire process:
+
+```groovy
+pipeline{
+    agent any
+    tools{
+        jdk 'jdk17'
+        nodejs 'node16'
+    }
+    environment {
+        SCANNER_HOME=tool 'sonar-scanner'
+    }
+    stages {
+        stage('clean workspace'){
+            steps{
+                cleanWs()
+            }
+        }
+        stage('Checkout from Git'){
+            steps{
+                git branch: 'main', url: 'https://github.com/Aj7Ay/Netflix-clone.git'
+            }
+        }
+        stage("Sonarqube Analysis "){
+            steps{
+                withSonarQubeEnv('sonar-server') {
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Netflix \
+                    -Dsonar.projectKey=Netflix '''
+                }
+            }
+        }
+        stage("quality gate"){
+           steps {
+                script {
+                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token' 
+                }
+            } 
+        }
+        stage('Install Dependencies') {
+            steps {
+                sh "npm install"
+            }
+        }
+        stage('OWASP FS SCAN') {
+            steps {
+                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
+        stage('TRIVY FS SCAN') {
+            steps {
+                sh "trivy fs . > trivyfs.txt"
+            }
+        }
+        stage("Docker Build & Push"){
+            steps{
+                script{
+                   withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
+                       sh "docker build --build-arg TMDB_V3_API_KEY=YOUR_TMDB_API_KEY -t netflix ."
+                       sh "docker tag netflix yourdockerhub/netflix:latest "
+                       sh "docker push yourdockerhub/netflix:latest "
+                    }
+                }
+            }
+        }
+        stage("TRIVY"){
+            steps{
+                sh "trivy image yourdockerhub/netflix:latest > trivyimage.txt" 
+            }
+        }
+        stage('Deploy to container'){
+            steps{
+                sh 'docker run -d --name netflix -p 8081:80 yourdockerhub/netflix:latest'
+            }
+        }
+        stage('Deploy to kubernets'){
+            steps{
+                script{
+                    dir('Kubernetes') {
+                        withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
+                                sh 'kubectl apply -f deployment.yml'
+                                sh 'kubectl apply -f service.yml'
+                        }   
+                    }
+                }
+            }
+        }
+    }
+    post {
+     always {
+        emailext attachLog: true,
+            subject: "'${currentBuild.result}'",
+            body: "Project: ${env.JOB_NAME}<br/>" +
+                "Build Number: ${env.BUILD_NUMBER}<br/>" +
+                "URL: ${env.BUILD_URL}<br/>",
+            to: 'your-email@example.com',
+            attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
+        }
+    }
+}
 ```
 
-## Todo
+---
 
-- Make the animation of video card portal more similar to Netflix.
-- Improve performance. I am using `context` and `provider` but all components subscribed to the context's value are re-rendered. These re-renders happen even if the part of the value is not used in render of the component. there are [several ways](https://blog.axlight.com/posts/4-options-to-prevent-extra-rerenders-with-react-context/) to prevent the re-renders from these behaviours. In addition to them, there may be several performance issues.
-- Replace bundler([Vite](https://vitejs.dev/guide)) with [Turbopack](https://turbo.build/pack/docs/why-turbopack). Turbopack is introduced in Next.js conf recently. It's very fast but it's nor ready to use right now. it just support Next.js, and they plan to support all others as soon as possible. so if it's ready to use, replace [Vite](https://vitejs.dev/guide) with [Turbopack](https://turbo.build/pack/docs/why-turbopack).
-- Add accessibilities for better UX.
-- Add Tests.
+## Credits
+- Original Netflix Clone: [jason-liu22/netflix-clone-react-typescript](https://github.com/jason-liu22/netflix-clone-react-typescript)
+- DevOps Pipeline, Monitoring, and Documentation: [Your Name]
+
+---
+
+## License
+This project is for educational and demonstration purposes. 
